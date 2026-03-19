@@ -13,7 +13,7 @@ class Quiz extends StatefulWidget {
   }
 }
 
-  class _QuizState extends State<Quiz> {
+  class _QuizState extends State<Quiz> { //saving the data of the quiz in the selected answers array
     List<String> selectedAnswers = [];
 
     void chooseAnswer(String answer) {
@@ -23,9 +23,18 @@ class Quiz extends StatefulWidget {
           //this is going to change. deal with answer screen
           //selectedAnswers = []; //this wont be empty
           activeScreen = ResultsScreen(
-            chosenAnswers: selectedAnswers,);
+            chosenAnswers: selectedAnswers,
+            onRestart: restartQuiz,
+            ); //constructor for results screen so we can pass the selected answers to it and use it in the results screen
         });
       }
+    }
+
+    void restartQuiz(){ //adding function to restart quiz and pass it to results screen so we can call it when the user clicks the restart button
+      setState((){
+        selectedAnswers = [];
+        activeScreen = StartScreen(switchScreen);
+      });
     }
 
   Widget? activeScreen;
