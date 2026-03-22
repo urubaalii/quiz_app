@@ -40,14 +40,22 @@ class ResultsScreen extends StatelessWidget{
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:  [
-            Text('You answered $numTotalCorrect out of $numTotalQuestions questions Correctly'),
+            Text('You answered $numTotalCorrect out of $numTotalQuestions questions correctly!',
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+        ),
             const SizedBox(height:30,),
             QuestionSummary(summaryData: summaryData), //loop through that summary object
             const SizedBox(height:30,),
             TextButton(
               onPressed: onRestart, //call the onRestart function that we passed in from the quiz screen when user clicks button
               child: const Text('Restart Quiz'),
-            )
+            ),
+          
           ],
         ),
       ),
