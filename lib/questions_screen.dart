@@ -14,7 +14,7 @@ final void Function(String answer) onSelectedAnswer;
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-      var currentQuestionIndex = 0;
+      var currentQuestionIndex = 0; //keeps track of question user is on
       void answerQuestion(String selectedAnswer){
         widget.onSelectedAnswer(selectedAnswer);
         setState(() {
@@ -27,7 +27,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final currentQuestion = questions[currentQuestionIndex];
+    final currentQuestion = questions[currentQuestionIndex];//pulling current question from index 
     return SizedBox(
       width: double.infinity,
       child: Container( //added container here to add margin to the content
@@ -46,8 +46,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             ),
             const SizedBox(height: 30),
             ...currentQuestion.getShuffledAnswers().map((item) { //function that creates a list of answer buttons from the list of answers 
-              return AnswerButton(answerText: item,
-              onTap:(){
+              return 
+                AnswerButton(answerText: item,
+                onTap:(){
                 answerQuestion(item);
               });
             })

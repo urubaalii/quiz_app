@@ -14,15 +14,13 @@ class Quiz extends StatefulWidget {
 }
 
   class _QuizState extends State<Quiz> { //saving the data of the quiz in the selected answers array
-    List<String> selectedAnswers = [];
+    List<String> selectedAnswers = []; //stores all answers from user
 
-    void chooseAnswer(String answer) {
+    void chooseAnswer(String answer) { //function to save the answer to the answers array
       selectedAnswers.add(answer);
-      if(selectedAnswers.length == questions.length){
+      if(selectedAnswers.length == questions.length){ //if user answered all questions..
         setState((){
-          //this is going to change. deal with answer screen
-          //selectedAnswers = []; //this wont be empty
-          activeScreen = ResultsScreen(
+          activeScreen = ResultsScreen( //switch to results screen
             chosenAnswers: selectedAnswers,
             onRestart: restartQuiz,
             ); //constructor for results screen so we can pass the selected answers to it and use it in the results screen
@@ -30,21 +28,22 @@ class Quiz extends StatefulWidget {
       }
     }
 
-    void restartQuiz(){ //adding function to restart quiz and pass it to results screen so we can call it when the user clicks the restart button
+    void restartQuiz(){ //clears answers and sends user back to start screen
       setState((){
         selectedAnswers = [];
         activeScreen = StartScreen(switchScreen);
       });
     }
 
-  Widget? activeScreen;
+  Widget? activeScreen; //then switch to questions screen
   void switchScreen() {
     setState(() {
       activeScreen = QuestionsScreen(onSelectedAnswer: chooseAnswer);
     });
   }
+  @override
 void initState(){
-  activeScreen = StartScreen(switchScreen);
+  activeScreen = StartScreen(switchScreen); //start w start screen
   super.initState();
 }
   @override
